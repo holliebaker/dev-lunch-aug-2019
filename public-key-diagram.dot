@@ -1,0 +1,38 @@
+digraph G {
+    rankdir=LR;
+    
+    node [shape=note,style=filled,fillcolor=ivory];
+    plaintext [label="Plaintext"];
+    plaintext2 [label="Plaintext"];
+    ciphertext [label="Ciphertext"];
+    
+    node[shape=rarrow,style=filled,fillcolor=green3];
+    enc [label="Encrypt"];
+    dec [label="Decrypt"];
+    
+    node[shape=none,style=none];
+    E [label="Bob's public key"];
+    D [label="Bob's private key"];
+
+    node[shape=circle,style=filled,fillcolor=turquoise1];
+    A [label="Alice"];
+    B [label="Bob"];
+
+    plaintext -> enc;
+    E -> enc;
+    
+    enc -> ciphertext;
+    
+    ciphertext -> dec;
+    D -> dec;
+    
+    dec -> plaintext2;
+    
+    {rank=same A, plaintext};
+    {rank=same B, plaintext2};
+    A -> plaintext [dir=none];
+    B -> plaintext2 [dir=none];
+
+    {rank=same E, enc};
+    {rank=same D, dec};
+}

@@ -1,0 +1,41 @@
+digraph G {
+    rankdir=LR;
+    
+    node [shape=note,style=filled,fillcolor=ivory];
+    message [label="Meshage"];
+    hash [label="Hash"];
+    message2 [label="Message (?)"];
+    hash2 [label="Hash"];
+    sig [label="Signature"]
+
+    node[shape=rarrow,style=filled,fillcolor=green3];
+    sign [label="Sign"];
+    verify [label="Verify"];
+    hashfunc [label="Compute Hash"];
+    hashfunc2 [label="Compute Hash"];
+
+    node[shape=none,style=none];
+    E [label="Alice's public key"];
+    D [label="Alice's private key"];
+    V [label="It's really from Alice!"];
+
+    node[shape=circle,style=filled,fillcolor=turquoise1];
+    A [label="Alice"];
+    B [label="Bob"];
+
+
+    A -> message [dir=none];
+    message -> hashfunc -> hash -> sign -> sig -> verify;
+
+    
+    sig-> B -> message2 [dir=none];
+    message2 -> hashfunc2 -> hash2 -> verify;
+    
+    verify -> V
+    
+    D -> sign;
+    E -> verify;
+ 
+    {rank=same A,message}
+    {rank=same B,message2,sig}
+}
