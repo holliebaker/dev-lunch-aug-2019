@@ -36,6 +36,6 @@ digraph G {
     D -> sign;
     E -> verify;
  
-    {rank=same A,message}
-    {rank=same B,message2,sig}
+    {rank=same A,message,B,message2}
+    {rank=same B,message2}
 }

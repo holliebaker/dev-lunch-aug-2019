@@ -13,60 +13,98 @@
 \frame{
     \frametitle{Alice and Bob need to talk, but they are being watched...}
 
-    They need to encrypt their communications, but they don't have a secure channel to share an \em{encryption key}.
+    They need to encrypt their communications, but they don't have a secure channel to share an {\em encryption key}.
 
-    One option is to use the \em{RSA cryptosystem}.
-}
-
-\frame{
-    \title{Rivest, Shamir \& Adleman}
-
-    \begin{center}
-        \includegraphics[width=.5\textwidth]{rsa}
-    \end{center}
+    One option is to use the {\em RSA cryptosystem}.
 }
 
 \frame{
     \frametitle{Rivest, Shamir \& Adleman}
 
-    The original idea of public key crypto was published by Diffie and Hellman in 1976, but they left the implementation as an open question.
+    \begin{columns}
+        \begin{column}{.3\textwidth}
+            \begin{center}
+                \begin{figure}
+                \includegraphics[width=.9\textwidth]{DiffieHellman}
+                \caption{\footnotesize Photo of Martin Hellman and Whitfield Diffie}
+                \end{figure}
+            \end{center}
+        \end{column}
 
-    Rivest, Shamir and Adelman, three MIT academics, started working on it in the 1990s.
+        \begin{column}{.7\textwidth}
+            The original idea of public key crypto was published by Diffie and Hellman in 1976, but they left the implementation as an open question.
 
-    Rivest and Shamir were computer scientists, and as such they proposed lost of ideas.
+            Rivest, Shamir and Adelman, three MIT academics, started working on it in the 1990s.
 
-    Meanwhile it fell to Adelman, a mathematician, to find vulnerabilities in their potential functions.
+            Rivest and Shamir were computer scientists, and as such they proposed lost of ideas.
+
+            Meanwhile it fell to Adelman, a mathematician, to find vulnerabilities in their potential functions.
+        \end{column}
+    \end{columns}
+}
+
+\frame{
+    \begin{center}
+        \begin{figure}
+        \includegraphics[width=.9\textwidth]{rsa}
+        \caption{Photo of Ron Rivest, Adi Shamir and Leonard Adleman.}
+        \end{figure}
+    \end{center}
 }
 
 \frame{
     \frametitle{Rivest, Shamir \& Adelman}
 
-    The breakthrough happened one night in April 1987 after a student party.
+    \begin{columns}
+        \begin{column}{.6\textwidth}
+            The breakthrough happened one night in April 1987 after a student party.
 
-    Rivest, drunk and unable to sleep, started reading a maths textbook on the sofa.
+            Rivest, drunk and unable to sleep, started reading a maths textbook on the sofa.
 
-    He begun thinking about the problem, and had the famous RSA one-way function formulated by the morning.
-
-    \includegraphics{Ronald_L_Rivest_photo}
+            He begun thinking about the problem, and had the famous RSA one-way function formulated by the morning.
+        \end{column}
+        \begin{column}{.4\textwidth}
+            \begin{center}
+                \begin{figure}
+                \includegraphics[width=.9\textwidth]{Ronald_L_Rivest_photo}
+                \caption{Photo of Ron Rivest.}
+                \end{figure}
+            \end{center}
+        \end{column}
+    \end{columns}
 }
 
 \frame{
     \frametitle{Clifford Cocks}
 
-    Meanwhile, in the 1970s at GCHQ, Clifford Cocks was working on the same problem.
+    \begin{columns}
+        \begin{column}{.4\textwidth}
+            \begin{center}
+                \begin{figure}
+                \includegraphics[width=.9\textwidth]{Clifford-Cocks-FRS}
+                \caption{Photo of Clifford Cocks.}
+                \end{figure}
+            \end{center}
+        \end{column}
 
-    He developed an equivalent system, but it was kept classified until RSA was published in 1997.
+        \begin{column}{.6\textwidth}
+            Meanwhile, in the 1970s at GCHQ, Clifford Cocks was working on the same problem.
 
-    As far as we know, it was never deployed because of the cost of computational power at the time.
+            He developed an equivalent system, but it was kept classified until RSA was published in 1997.
 
-    \includegraphics{Clifford-Cocks-FRS}
+            As far as we know, it was never deployed because of the cost of computational power at the time.
+        \end{column}
+    \end{columns}
 }
 
 \frame{
     \frametitle{The RSA Cryptosystem}
 
     \begin{center}
-        \includegraphics{pkc}
+        \begin{figure}
+        \includegraphics[width=\textwidth]{pkc}
+        \caption{Alice sending Bob and encrypted message using a public key cryptosystem.}
+        \end{figure}
     \end{center}
 
     Bob’s key consists of two parts: public part which he publishes, and a private part which he keeps secret.
@@ -132,7 +170,7 @@
     \frametitle{RSA: Key Generation}
 
     \begin{itemize}
-        \item Pick two \em{large, prime integers} $p$ and $q$.
+        \item Pick two {\em large, prime integers} $p$ and $q$.
         \item Calculate
         $$
         n = pq.
@@ -158,17 +196,19 @@
     $$
     C = P^e \mod n.
     $$
+    where $e$ is the encryption exponent - i.e., the public key.
 
     The decryption function is
     $$
-    P = C^d \mod p.
+    P = C^d \mod n
     $$
+    where $d$ is the decryption exponent - i.e., the private key.
 
     Decryption is the inverse of encryption, i.e.,
     $$
     P \equiv P^{ed} \mod n.
     $$
-    You can prove it with number theory stuff like Fermat's Little theorem, and this is why RSA works.
+    You can prove it with some number theory stuff like Fermat's Little theorem, and this is why RSA works.
 }
 
 \frame{
@@ -178,8 +218,8 @@
 
     For an attacker to break RSA with only the public information, $e$ and $n$, she needs to find $\phi(n)$. There are two options
     \begin{itemize}
-        \item Factorise $n$ to find the prime numbers $p$ and $q$ and then calculate $\phi(n) = \phi(pq)$ - \em{hard}
-        \item Find $\phi(n)$ directly with only $n$ to work with - \em{there's no known algorithm for that either.}
+        \item Factorise $n$ to find the prime numbers $p$ and $q$ and then calculate $\phi(n) = \phi(pq)$ - {\em hard}
+        \item Find $\phi(n)$ directly with only $n$ to work with - {\em there's no known algorithm for that either.}
     \end{itemize}
 
     The RSA Factoring challenge gave prizes for people who could factor large numbers.
@@ -211,7 +251,10 @@
     \frametitle{Digital Signatures}
 
     \begin{center}
+        \begin{figure}
         \includegraphics[width=\textwidth]{sig}
+        \caption{Bob uses Alice's digital signature to verify the identity of a message.}
+        \end{figure}
     \end{center}
 
     Only Alice can create this particular signature because only she has the private key. On the other hand, anybody can verify the message using Alice's public key.
@@ -229,7 +272,7 @@
 
 \frame{
     \frametitle{But how do we know the certificate is for real}
-
+`
     This is where the Certificate Authority (CA) comes in. A CA is a trusted entity who is responsible for issuing and revoking certificates. To get a certificate, you have to prove to the CA that you are who you say you are. E.g., if you want an SSL certificate for a certain domain, you have to show that you own that domain.
 
     Often the process of checking an entity is legit is outsourced to a Registration Authority (RA) who does all the necessary checks and then lets the CA know if the entity can be trusted so a certificate can be issued.
